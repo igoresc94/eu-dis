@@ -64,8 +64,8 @@ const Posts = () => {
   if (selectedPostContent) {
     return (
       <div style={{ padding: 20 }}>
-        <button onClick={() => setSelectedPostContent(null)}>Voltar</button>
-        <h2>{selectedPostTitle}</h2>
+        <button onClick={() => setSelectedPostContent(null)}>Back to articles</button>
+        <h3>{selectedPostTitle}</h3>
         <pre style={{ whiteSpace: 'pre-wrap' }}>{selectedPostContent}</pre>
       </div>
     );
@@ -86,10 +86,9 @@ const Posts = () => {
           title="Clique para ver o texto do artigo"
         >
           <h3>{post.title}</h3>
-          <h4>{post.subtitle}</h4>
           <p>
-            <b>Category:</b> {post.category} | <b>Country:</b> {post.country} |{' '}
-            <b>Topic:</b> {post.topic}
+            <b>Category: {post.category} </b>  <b>Country: {post.country} </b> {' '}
+            <b>Topic: {post.topic}</b>   <b>Subtitle: {post.subtitle} </b> 
           </p>
         </div>
       ))}

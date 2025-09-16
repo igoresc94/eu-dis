@@ -14,14 +14,24 @@ const App = () => {
           <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
         </button>{' '}
         <button>
+          <Link to="/about" style={{ textDecoration: 'none' }}>EU Parliament seats</Link>
+        </button>{' '}
+             <button>
+          <Link to="/about-country" style={{ textDecoration: 'none' }}>Parliament seats per country</Link>
+        </button>{' '}
+        <button>
           <Link to="/posts" style={{ textDecoration: 'none' }}>Posts</Link>
         </button>{' '}
-        <button>
-          <Link to="/about" style={{ textDecoration: 'none' }}>About</Link>
-        </button>{' '}
-        <button>
-          <Link to="/about-country" style={{ textDecoration: 'none' }}>About Country</Link>
-        </button>
+  <button>
+    <a 
+      href="https://drive.google.com/drive/folders/1oyuiDuoAAs88W-gMB8p4F2e5tX8Cgbb0?dmr=1&ec=wgc-drive-globalnav-goto" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
+      Upload your post
+    </a>
+  </button>
       </nav>
 
       <Routes>
