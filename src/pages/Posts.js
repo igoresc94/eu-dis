@@ -73,7 +73,7 @@ const Posts = () => {
 
   return (
     <div style={{ padding: 20, fontFamily: 'Arial, sans-serif' }}>
-      <h2>Artigos</h2>
+      <h2>Articles</h2>
       {posts.map((post, index) => (
         <div
           key={index}
