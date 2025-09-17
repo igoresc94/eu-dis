@@ -8,7 +8,8 @@ const Home = () => {
         <p>By choosing a country, topic, technique and writing a text, students simulate their disinformation/tacking disinformation technique through a post, and and everybody will be able to see the way they are working with their countries.</p>
         <p>In order to post, click on UPLOAD YOUR POST.</p>
          <p>It will open a public file on Google Docs. Drag your text with title into Posts folder.</p>
-         <p>As a last step, open Dashboard spreadsheet and complete the line of your text with the other information: Country, topic, technique.</p>
+         <p>After the text, open Dashboard spreadsheet and complete the line of your text with the other information: Country, topic, technique.</p>         <p>As a last step, open Dashboard spreadsheet and complete the line of your text with the other information: Country, topic, technique.</p>
+         <p>As a last step, go to Update and click on Update Dashboard. You should be able to see your post now.</p>
     </div>
   );
 };
