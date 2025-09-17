@@ -5,12 +5,10 @@ import StaticPartiesTable from './StaticPartyTable.js'; // Corrigido import para
 const About = () => {
   return (
     <div style={{  fontFamily: 'Arial, sans-serif' }}>
-      {/* Tabela estática acima */}
-      <StaticPartiesTable />
 
       {/* Tabela dinâmica de totais */}
-      <h2 style={{ marginTop: '40px' }}>European Parliament Seats per Party (Total)</h2>
-      <table border="1" cellPadding="5" cellSpacing="0">
+      <h2 style={{ marginTop: '40px'}}>Updated European Parliament seats</h2>
+      <table border="1" cellPadding="5" cellSpacing="0" style={{ marginBottom: '40px' }}>
         <thead>
           <tr>
             <th>Party</th>
@@ -26,6 +24,7 @@ const About = () => {
           ))}
         </tbody>
       </table>
+            <StaticPartiesTable />
     </div>
   );
 };

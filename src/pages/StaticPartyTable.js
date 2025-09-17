@@ -3,7 +3,7 @@ import React from 'react';
 const StaticPartiesTable = () => {
   return (
     <div>
-      <h2>Current European Union Parties</h2>
+      <h2>Former European Parliament seats</h2>
       <table style={{ borderCollapse: 'collapse', marginTop: '20px', border: '1px solid black' }}>
         <thead>
           <tr>
@@ -14,11 +14,11 @@ const StaticPartiesTable = () => {
         <tbody>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>The Left in the European Parliament</td>
-            <td style={{ border: '1px solid black', padding: '5px' }}>40</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>41</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>Progressive Alliance of Socialists &amp; Democrats</td>
-            <td style={{ border: '1px solid black', padding: '5px' }}>148</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>154</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>Greens/European Free Alliance</td>
@@ -26,11 +26,11 @@ const StaticPartiesTable = () => {
           </tr>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>European People's Party</td>
-            <td style={{ border: '1px solid black', padding: '5px' }}>187</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>182</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>Renew Europe</td>
-            <td style={{ border: '1px solid black', padding: '5px' }}>97</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>108</td>
           </tr>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>European Conservatives and Reformists</td>
@@ -38,7 +38,15 @@ const StaticPartiesTable = () => {
           </tr>
           <tr>
             <td style={{ border: '1px solid black', padding: '5px' }}>Identity and Democracy</td>
-            <td style={{ border: '1px solid black', padding: '5px' }}>76</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>73</td>
+          </tr>
+                 <tr>
+            <td style={{ border: '1px solid black', padding: '5px' }}>Non-Inscrits</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>57</td>
+          </tr>
+                          <tr>
+            <td style={{ border: '1px solid black', padding: '5px' }}>Total</td>
+            <td style={{ border: '1px solid black', padding: '5px' }}>705</td>
           </tr>
         </tbody>
       </table>
