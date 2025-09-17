@@ -9,7 +9,7 @@ const AboutCountry = () => {
   );
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ fontFamily: 'Arial, sans-serif' }}>
       <h2>Seats by Country</h2>
       <select
         value={selectedCountry}

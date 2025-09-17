@@ -4,7 +4,7 @@ import StaticPartiesTable from './StaticPartyTable.js'; // Corrigido import para
 
 const About = () => {
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div style={{  fontFamily: 'Arial, sans-serif' }}>
       {/* Tabela estática acima */}
       <StaticPartiesTable />
 

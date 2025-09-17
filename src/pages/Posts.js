@@ -63,7 +63,7 @@ const Posts = () => {
 
   if (selectedPostContent) {
     return (
-      <div style={{ padding: 20 }}>
+      <div style={{ padding: 0 }}>
         <button onClick={() => setSelectedPostContent(null)}>Back to articles</button>
         <h3>{selectedPostTitle}</h3>
         <pre style={{ whiteSpace: 'pre-wrap' }}>{selectedPostContent}</pre>
@@ -72,7 +72,7 @@ const Posts = () => {
   }
 
   return (
-    <div style={{ padding: 20, fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ padding: 10, fontFamily: 'Arial, sans-serif' }}>
       <h2>Articles</h2>
       {posts.map((post, index) => (
         <div

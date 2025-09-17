@@ -10,30 +10,30 @@ const App = () => {
   return (
     <Router>
       <nav style={{ marginBottom: '20px' }}>
-        <button>
-          <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
-        </button>{' '}
-        <button>
-          <Link to="/about" style={{ textDecoration: 'none' }}>EU Parliament seats</Link>
-        </button>{' '}
-             <button>
-          <Link to="/about-country" style={{ textDecoration: 'none' }}>Parliament seats per country</Link>
-        </button>{' '}
-        <button>
-          <Link to="/posts" style={{ textDecoration: 'none' }}>Posts</Link>
-        </button>{' '}
-  <button>
-    <a 
-      href="https://drive.google.com/drive/folders/1oyuiDuoAAs88W-gMB8p4F2e5tX8Cgbb0?dmr=1&ec=wgc-drive-globalnav-goto" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      style={{ textDecoration: 'none', color: 'inherit' }}
-    >
-      Upload your post
-    </a>
-  </button>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <button>About simulator</button>
+        </Link>{' '}
+        <Link to="/about" style={{ textDecoration: 'none' }}>
+          <button>EU Parliament seats</button>
+        </Link>{' '}
+        <Link to="/about-country" style={{ textDecoration: 'none' }}>
+          <button>Parliament seats per country</button>
+        </Link>{' '}
+        <Link to="/posts" style={{ textDecoration: 'none' }}>
+          <button>Posts</button>
+        </Link>{' '}
+        <a
+          href="https://drive.google.com/drive/folders/1oyuiDuoAAs88W-gMB8p4F2e5tX8Cgbb0?dmr=1&ec=wgc-drive-globalnav-goto"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: 'none' }}
+        >
+          <button>Upload your post</button>
+        </a>
+        <div style={{ padding: 10, fontFamily: 'Arial, sans-serif' }}>
+      <h1>Understanding Fake News Simulator</h1>
+    </div>
       </nav>
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/posts" element={<Posts />} />
