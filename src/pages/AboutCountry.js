@@ -1,11 +1,46 @@
 import React, { useState } from 'react';
-import { EU_Countries, EU_Parties, EU_Parliament_Seats } from '../data.js';
+import { EU_Countries, EU_Parties, EU_Parliament_Seats, Former_Parliament_Seats } from '../data.js';
 
 const AboutCountry = () => {
   const [selectedCountry, setSelectedCountry] = useState('');
 
-  const selectedSeats = EU_Parliament_Seats.find(
+  const currentSeats = EU_Parliament_Seats.find(
     (item) => item.country === selectedCountry
+  );
+  const formerSeats = Former_Parliament_Seats.find(
+    (item) => item.country === selectedCountry
+  );
+
+  const renderSeatsTable = (seatsObj, label) => (
+    <>
+      <h3 style={{ marginTop: '20px' }}>
+        {label} in {selectedCountry}
+      </h3>
+      <table border="1" cellPadding="5" cellSpacing="0" style={{ marginBottom: 24 }}>
+        <thead>
+          <tr>
+            <th>Party</th>
+            <th>Seats</th>
+          </tr>
+        </thead>
+        <tbody>
+          {EU_Parties.map((party) => (
+            <tr key={party.id}>
+              <td>{party.name}</td>
+              <td style={{ textAlign: 'center' }}>
+                {seatsObj?.[party.name] ?? seatsObj?.[party.seats] ?? 0}
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <td>Total</td>
+            <td style={{ textAlign: 'center' }}>
+              {seatsObj?.Total ?? 0}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   );
 
   return (
@@ -24,29 +59,12 @@ const AboutCountry = () => {
         ))}
       </select>
 
-      {selectedCountry && selectedSeats ? (
+      {selectedCountry && (currentSeats || formerSeats) ? (
         <>
-          <h3 style={{ marginTop: '20px' }}>
-            Seats distribution in {selectedCountry}
-          </h3>
-          <table border="1" cellPadding="5" cellSpacing="0">
-            <thead>
-              <tr>
-                <th>Party</th>
-                <th>Seats</th>
-              </tr>
-            </thead>
-            <tbody>
-              {EU_Parties.map((party) => (
-                <tr key={party.id}>
-                  <td>{party.name}</td>
-                  <td style={{ textAlign: 'center' }}>
-                    {selectedSeats[party.name] ?? 0}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {currentSeats &&
+            renderSeatsTable(currentSeats, 'Current seats distribution')}
+          {formerSeats &&
+            renderSeatsTable(formerSeats, 'Former seats distribution')}
         </>
       ) : selectedCountry ? (
         <p>No seat data available for {selectedCountry}.</p>
