@@ -5,6 +5,10 @@ import Home from './pages/Home';
 import Posts from './pages/Posts';
 import About from './pages/About';
 import AboutCountry from './pages/AboutCountry';
+import UploadHere from './pages/UploadHere';
+import PostsHere from './pages/PostsHere';
+
+
 
 const App = () => {
   return (
@@ -18,6 +22,12 @@ const App = () => {
         </Link>{' '}
         <Link to="/about-country" style={{ textDecoration: 'none' }}>
           <button>Parliament seats per country</button>
+        </Link>{' '}
+        <Link to="/upload-here" style={{ textDecoration: 'none' }}>
+          <button>Upload here</button>
+        </Link>{' '}
+          <Link to="/posts-here" style={{ textDecoration: 'none' }}>
+          <button>New Posts</button>
         </Link>{' '}
         <Link to="/posts" style={{ textDecoration: 'none' }}>
           <button>Posts</button>
@@ -39,6 +49,8 @@ const App = () => {
         <Route path="/posts" element={<Posts />} />
         <Route path="/about" element={<About />} />
         <Route path="/about-country" element={<AboutCountry />} />
+        <Route path="/upload-here" element={<UploadHere />} />
+        <Route path="/posts-here" element={<PostsHere />} />
       </Routes>
     </Router>
   );
