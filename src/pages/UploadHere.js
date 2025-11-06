@@ -69,7 +69,26 @@ const UploadHere = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // New function: send post data to Google Apps Script to send email
+  const submitPost = async (postData) => {
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzjnTu4QV9WC86M38JDaLgOTAsLEubeqenWDr83WuONkV5MJ4GfkeOkwwEObvaoE9uP/exec', {  // <-- Replace with your actual URL
+        method: 'POST',
+        body: JSON.stringify(postData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const result = await response.json();
+      if (result.result !== 'success') {
+        console.error('Error sending email:', result.message);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error.message);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) {
       setSubmitMessage('');
@@ -87,12 +106,15 @@ const UploadHere = () => {
       date: new Date().toISOString(),
     };
 
-    // ✅ Save post to localStorage
+    // Save post to localStorage
     const existing = JSON.parse(localStorage.getItem('posts') || '[]');
     const updated = [newPost, ...existing];
     localStorage.setItem('posts', JSON.stringify(updated));
 
-    // ✅ Reset form
+    // Send post data to Google Apps Script email
+    await submitPost(newPost);
+
+    // Reset form
     setSubmitMessage('Post submitted successfully!');
     setFormData({
       title: '',
