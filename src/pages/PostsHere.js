@@ -2,45 +2,31 @@ import React, { useEffect, useState } from 'react';
 
 const PostsHere = () => {
   const [posts, setPosts] = useState([]);
-
-  // To track which post description is expanded
-  const [expandedPostIndex, setExpandedPostIndex] = useState(null);
-
-  // To track which post's delete password input is shown
-  const [showPasswordFor, setShowPasswordFor] = useState(null);
-
-  // Delete password input state
-  const [passwordInput, setPasswordInput] = useState('');
-
-  // Delete password error message
-  const [deleteError, setDeleteError] = useState('');
+  const [openIndexes, setOpenIndexes] = useState([]);
 
   useEffect(() => {
     const storedPosts = JSON.parse(localStorage.getItem('posts') || '[]');
     setPosts(storedPosts);
   }, []);
 
-  // Save posts to localStorage on every change
-  useEffect(() => {
-    localStorage.setItem('posts', JSON.stringify(posts));
-  }, [posts]);
-
-  // Toggle description and image visibility on card click (excluding trashcan)
-  const toggleExpand = (index) => {
-    setExpandedPostIndex(expandedPostIndex === index ? null : index);
+  const toggleCard = (index) => {
+    setOpenIndexes((prev) =>
+      prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index]
+    );
   };
 
-  // Handle delete logic with password check
   const handleDelete = (index) => {
-    if (passwordInput === 'iamthebest') {
-      const newPosts = [...posts];
-      newPosts.splice(index, 1);
-      setPosts(newPosts);
-      setShowPasswordFor(null);
-      setPasswordInput('');
-      setDeleteError('');
+    const confirmation = prompt('Type password to confirm deletion:');
+    if (confirmation === 'iamthebest') {
+      const updatedPosts = posts.filter((_, i) => i !== index);
+      setPosts(updatedPosts);
+      localStorage.setItem('posts', JSON.stringify(updatedPosts));
+      // Optionally close the expanded card if it was open
+      setOpenIndexes((prev) => prev.filter((i) => i !== index));
     } else {
-      setDeleteError('Incorrect password.');
+      alert('Deletion cancelled or wrong confirmation text.');
     }
   };
 
@@ -55,121 +41,79 @@ const PostsHere = () => {
           <div
             key={index}
             style={{
-              backgroundColor: '#007BFF', // Bootstrap primary blue
-              color: 'white',
+              border: '1px solid #3498db',
               borderRadius: 10,
-              padding: 20,
               marginBottom: 20,
+              backgroundColor: '#3498db',
+              color: 'white',
               cursor: 'pointer',
-              userSelect: 'none',
+              boxShadow: openIndexes.includes(index)
+                ? '0 4px 18px rgba(52, 152, 219, .18)'
+                : '0 1px 4px rgba(52, 152, 219, .10)',
+              transition: 'box-shadow 0.2s',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              {/* Clicking on this text toggles expand */}
-              <div
-                onClick={() => toggleExpand(index)}
-                style={{ flex: 1 }}
-                title="Click to toggle description and image"
-              >
-                <h3 style={{ margin: 0 }}>{post.title}</h3>
-                <p style={{ margin: '5px 0' }}>
-                  <strong>Category:</strong> {post.category} <br />
-                  <strong>Country:</strong> {post.country} <br />
-                  <strong>Topic:</strong> {post.topic}
-                </p>
-              </div>
-
-              {/* Trashcan delete */}
-              <div style={{ marginLeft: 10 }}>
-                <button
-                  onClick={() => {
-                    setShowPasswordFor(index);
-                    setPasswordInput('');
-                    setDeleteError('');
-                  }}
-                  title="Delete this post"
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: 'white',
-                    fontSize: 24,
-                    cursor: 'pointer',
-                    userSelect: 'none',
-                  }}
-                >
-                  🗑️
-                </button>
-
-                {/* Show password input and buttons if delete active */}
-                {showPasswordFor === index && (
-                  <div style={{ marginTop: 8, textAlign: 'right' }}>
-                    <input
-                      type="password"
-                      value={passwordInput}
-                      onChange={(e) => setPasswordInput(e.target.value)}
-                      placeholder="Password"
-                      autoFocus
-                      style={{
-                        padding: 4,
-                        borderRadius: 4,
-                        border: '1px solid #ccc',
-                        marginBottom: 4,
-                        width: '100%',
-                        boxSizing: 'border-box',
-                      }}
-                    />
-                    <div>
-                      <button
-                        onClick={() => handleDelete(index)}
-                        style={{
-                          backgroundColor: '#dc3545',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: 4,
-                          padding: '4px 12px',
-                          marginRight: 4,
-                          cursor: 'pointer',
-                        }}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowPasswordFor(null);
-                          setPasswordInput('');
-                          setDeleteError('');
-                        }}
-                        style={{
-                          backgroundColor: '#6c757d',
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: 4,
-                          padding: '4px 12px',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                    {deleteError && (
-                      <p style={{ color: '#ffdddd', marginTop: 4 }}>{deleteError}</p>
-                    )}
-                  </div>
-                )}
+            {/* Card header: toggle on click */}
+            <div
+              onClick={() => toggleCard(index)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: 20,
+              }}
+            >
+              <div>
+                <h3 style={{ marginTop: 0, marginBottom: 8, color: 'white' }}>{post.title}</h3>
+                <p style={{ margin: '3px 0' }}><strong>Category:</strong> {post.category}</p>
+                <p style={{ margin: '3px 0' }}><strong>Country:</strong> {post.country}</p>
+                <p style={{ margin: '3px 0' }}><strong>Topic:</strong> {post.topic}</p>
+                <p style={{ margin: '3px 0' }}><strong>Subtitle:</strong> {post.subtitle}</p>
               </div>
             </div>
 
-            {/* Expanded content description + image */}
-            {expandedPostIndex === index && (
-              <div style={{ marginTop: 15 }}>
-                <p style={{ whiteSpace: 'pre-wrap' }}>{post.description}</p>
+            {/* Expanded part */}
+            {openIndexes.includes(index) && (
+              <div
+                style={{
+                  backgroundColor: '#3498db',
+                  color: 'white',
+                  borderRadius: '0 0 10px 10px',
+                  padding: 20,
+                  borderTop: '1px solid #2980b9',
+                  position: 'relative',
+                }}
+              >
+                <p><strong>Description:</strong> {post.description}</p>
                 {post.image && (
-                  <img
-                    src={post.image}
-                    alt={`${post.title} image`}
-                    style={{ maxWidth: '100%', borderRadius: 8, marginTop: 10 }}
-                  />
+                  <div style={{ marginTop: 10 }}>
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      style={{ maxWidth: '100%', borderRadius: 8 }}
+                    />
+                  </div>
                 )}
+                {/* Trash bin button */}
+                <span
+                  title="Delete"
+                  style={{
+                    position: 'absolute',
+                    top: 15,
+                    right: 15,
+                    fontSize: 24,
+                    cursor: 'pointer',
+                    userSelect: 'none',
+                    color: 'white',
+                    transition: 'color 0.2s',
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent toggling card
+                    handleDelete(index);
+                  }}
+                >
+                  🗑️
+                </span>
               </div>
             )}
           </div>
